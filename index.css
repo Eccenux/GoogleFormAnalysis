@@ -1,0 +1,68 @@
+body {
+	font: 12px Tahoma, sans-serif;
+}
+
+.total-answers.total-people,
+[class*=" total-"], [class^=total-] {
+	color: #777;
+}
+
+.total-answers,
+.total-percentage {
+	color: #ccc;
+}
+
+/* lists with options summary */
+ul[class^=summary-] {
+	display: table;
+	margin: 0;
+	padding: 0;
+}
+ul[class^=summary-] > li.option {
+	display: table-row;
+}
+ul[class^=summary-] > li.option > span {
+	display: table-cell;
+	padding: .2em .5em;
+}
+
+/* lists with text */
+ul.summary-text {
+	display: block;
+	padding-left: 1.5em;
+	padding-left: 1.5em;
+}
+ul.summary-text li {
+	padding-bottom: .5em;
+}
+
+/* grids */
+ul.summary-grid {
+	display: block;
+}
+ul.summary-grid > li {
+	display: block;
+}
+ul.summary-grid > li > span {
+	display: none;
+}
+/* grid-cells */
+.sub-summary {
+	float : left;
+	width: 260px;
+	height: 12em;
+	box-sizing: border-box;
+	padding-right: 1em;
+}
+.sub-summary h2 {
+	font-size: 100%;
+}
+/* internal clear :-) */
+.summary-grid > *:last-child:after
+{
+	content: " ";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
