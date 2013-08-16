@@ -91,7 +91,7 @@ function Answers(answersData, questions) {
 			header.question = questions.findQuestion(header.title);
 			if (header.question == null) {
 				isOK = false;
-				_LOG.error('Unable to find: ', row);
+				_LOG.error('Unable to find: ', header);
 				if (stopOnFirstError) {
 					return isOK;
 				}
@@ -107,8 +107,8 @@ function Answers(answersData, questions) {
 	 * @param {Boolean} stopOnFirstError Stop check upon first error (default = false).
 	 */
 	function _parseAnserwers (stopOnFirstError) {
-		for (var i = 1; i < answersData.length; i++) {
-			var row = answersData[i];
+		for (var rowIndex = 1; rowIndex < answersData.length; rowIndex++) {
+			var row = answersData[rowIndex];
 			if (row.length != _headers.length) {
 				_LOG.error("row.length != headerRow.length; row:", row);
 				if (stopOnFirstError) {
@@ -126,15 +126,18 @@ function Answers(answersData, questions) {
 			}
 			*/
 			var answer = [];
+			var merges = {};
 			// search for answer titles in questions from model
-			for (var j = 0; j < row.length; j++) {
-				var rawValue = row[j];
+			for (var columnIndex = 0; columnIndex < row.length; columnIndex++) {
+				var rawValue = row[columnIndex].replace(/\s+$/, '');
+				/** @type AnswerHeader */
+				var header = _headers[columnIndex];
 				// skip empty
 				if (rawValue.length < 1) {
 					continue;
 				}
 				// parse
-				var answerValue = new AnswerValue(_headers[j], row[j]);
+				var answerValue = new AnswerValue(header, row[columnIndex]);
 				// validate
 				if (!questions.isValid(answerValue)) {
 					if (stopOnFirstError) {
@@ -143,6 +146,25 @@ function Answers(answersData, questions) {
 					}
 					_LOG.warn("skipped invalid answer");
 					continue;
+				}
+				// skip if this answer is to be merged
+				if ('titles' in header.question) {
+					var questionTitle = header.question.title;
+					if (!(questionTitle in merges)) {
+						merges[questionTitle] = [];
+					}
+					merges[questionTitle].push(answerValue);
+				}
+				else {
+					answer.push(answerValue);
+				}
+			}
+			// now we can merge answers and push them
+			for (var questionTitle in merges) {
+				var answerValuesArray = merges[questionTitle];
+				var answerValue = answerValuesArray[0];	// first as a base
+				for (var i = 1; i < answerValuesArray.length; i++) {	// add the rest if available
+					answerValue.value += ';\n ' + answerValuesArray[i].value;
 				}
 				answer.push(answerValue);
 			}
@@ -156,20 +178,34 @@ function Answers(answersData, questions) {
 	this.getAnswers = function () {
 		return _answers;
 	};
-	
+
 	/**
 	 * Generate a summary of answers.
 	 * 
-	 * @todo filters
+	 * @param {FilterSet} options FilterSet instance.
+	 * @return {Object} Associative array with keys made of question.title and values of type SummaryRow.
 	 */
-	this.summary = function () {
+	this.summary = function (options) {
 		var summary = {};
+		options = options || {};
+
 		for (var i = 0; i < _answers.length; i++) {
 			var answer = _answers[i];
+			if ('answerFilter' in options) {
+				if (options.answerFilter(answer)) {
+					continue;
+				}
+			}
 			for (var j = 0; j < answer.length; j++) {
 				/** @type AnswerValue */
 				var answerValue = answer[j];
 				var question = answerValue.header.question;
+				// filtering by question
+				if ('questionFilter' in options) {
+					if (options.questionFilter(question)) {
+						continue;
+					}
+				}
 				// new summary row
 				if (!(question.title in summary)) {
 					summary[question.title] = new SummaryRow(question);

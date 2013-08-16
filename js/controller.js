@@ -1,33 +1,49 @@
-window.answers = (function(){
-	var questions = new Questions(questionsData);
-	var answers = new Answers(answersData, questions);
-	
-	return answers;
-})();
+/**
+ * Parsing data to answers.
+ */
+var questions = new Questions(questionsData);
+var answers = new Answers(answersData, questions);
 
-window.summary = (function(answers){
+/**
+ * Creating summary (visual and object with SummaryRows in an assoc. array).
+ * @type Object
+ */
+window.summary = (function(answers, questions){
 	var _LOG = new Logger("controller");
 
-	var summary = answers.summary();
+	var filterSet = new FilterSet(filterSets['liczba mas: żadna']);
 
-	var html = "";
-	/** kolejność niby-losowa
-	for (var i in summary) {
-		/ ** @type SummaryRow * /
-		var summaryRow = summary[i];
-		html += summaryRow.render();
+	var summary = answers.summary(filterSet);
+
+	var questionsOrder = ('questionsOrder' in filterSet) ? filterSet.questionsOrder : questions.getTitles();
+	if ('questionsGrouppedOrder' in filterSet) {
+		questionsOrder = filterSet.questionsGrouppedOrder;
 	}
-	/**/
-	for (var i = 0; i < questionsData.length; i++) {
-		var title = questionsData[i].title;
+
+	function _renderRow(title) {
+		html += "<div class='question'>"
 		if (title in summary) {
 			var summaryRow = summary[title];
 			html += summaryRow.render();
 		}
+		html += "</div>"
 	}
-	/**/
+
+	var html = "";
+	for (var i = 0; i < questionsOrder.length; i++) {
+		if (typeof(questionsOrder[i]) != 'object') {
+			_renderRow(questionsOrder[i]);
+		}
+		else {
+			html += "<div class='questions-group'>"
+			for (var j = 0; j < questionsOrder[i].length; j++) {
+				_renderRow(questionsOrder[i][j]);
+			}
+			html += "</div>"
+		}
+	}
 	document.getElementById('summary').innerHTML = html;
 
 	return summary;
-})(window.answers);
+})(answers, questions);
 

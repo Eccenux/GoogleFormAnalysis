@@ -27,12 +27,12 @@ ul[class^=summary-] > li.option > span {
 }
 
 /* lists with text */
-ul.summary-text {
+ul[class^=summary-text] {
 	display: block;
 	padding-left: 1.5em;
 	padding-left: 1.5em;
 }
-ul.summary-text li {
+ul[class^=summary-text] li {
 	padding-bottom: .5em;
 }
 
@@ -57,8 +57,17 @@ ul.summary-grid > li > span {
 .sub-summary h2 {
 	font-size: 100%;
 }
-/* internal clear :-) */
-.summary-grid > *:last-child:after
+
+/* groups */
+.questions-group .question {
+	float : left;
+	box-sizing: border-box;
+	padding-right: 2em;
+}
+
+/* clear on a fake element after container */
+.questions-group:after,
+.summary-grid:after
 {
 	content: " ";
 	display: block;

@@ -2,11 +2,12 @@
  * Single question.
  *
  * Types:
- * <li> [select-one] pl: jednokrotny wybór = wybierz z listy
- * <li> [select-many] pl: wielokrotny wybór
- * <li> [text] pl: tekst = tekst akapitu
- * <li> [date] pl: data
- * <li> [grid] pl: siatka -> [select-one]
+ * <li> [select-one] (pl: jednokrotny wybór = wybierz z listy)
+ * <li> [select-many] (pl: wielokrotny wybór)
+ * <li> [text] (pl: tekst = tekst akapitu)
+ * <li> [text-merged] two text types merged together (pl: dwa, połączone pola tekstowe)
+ * <li> [date] (pl: data)
+ * <li> [grid] (pl: siatka)
  *
  * @param {Question} properties Any public properties to be overriden. Type and title MUST be given for any type.
  * @returns {Question}
@@ -30,6 +31,9 @@ function Question(properties) {
 
 	// depending on type
 	switch (properties.type) {
+		case 'text-merged':
+			this.titles = properties.titles;
+		break;
 		case 'select-one':
 		case 'select-many':
 			this.options = properties.options;
@@ -53,6 +57,7 @@ function Question(properties) {
  */
 function Questions(questionsData) {
 	var _questionTitles = [];
+	var _mergedTitles = {};	// assoc. array with title : actual index
 	var _self = this;
 
 	var _LOG = new Logger("questions");
@@ -64,8 +69,22 @@ function Questions(questionsData) {
 		for (var i = 0; i < questionsData.length; i++) {
 			var question = new Question(questionsData[i]);
 			_questionTitles.push(question.title);
+			// merged question
+			if ('titles' in question) {
+				for (var j = 0; j < question.titles.length; j++) {
+					_mergedTitles[question.titles[j]] = _questionTitles.length - 1;
+				}
+			}
 		}
 		_self.length = _questionTitles.length;
+	}
+
+	/**
+	 * Get titles of all questions.
+	 * @returns {Array}
+	 */
+	this.getTitles = function() {
+		return _questionTitles;
 	}
 
 	/**
@@ -75,7 +94,14 @@ function Questions(questionsData) {
 	 * @returns {Number} Index in questions array or -1 if the value is not found.
 	 */
 	this.indexOf = function (title) {
-		return _questionTitles.indexOf(title);
+		var index = _questionTitles.indexOf(title);
+		// check merged
+		if (index < 0) {
+			if (title in _mergedTitles) {
+				index = _mergedTitles[title];
+			}
+		}
+		return index;
 	};
 
 	/**
@@ -97,7 +123,7 @@ function Questions(questionsData) {
 	 * @returns {Question} Question from the array.
 	 */
 	this.findQuestion = function (title) {
-		var index = _questionTitles.indexOf(title);
+		var index = this.indexOf(title);
 		if (index < 0) {
 			return null;
 		}
