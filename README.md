@@ -33,7 +33,7 @@ This will allow you to get more interesting (and maybe controversial) informatio
 are there any signifcant differnces between women and men.
 
 So simple filtering is simple ;-). Just add filterSets with skip or keep object:
-```
+```javascript
 	var filterSets = {
 		"all" : {
 		},
@@ -58,7 +58,7 @@ If you have many questions in your survey and want to focus only on some questio
 
 We go back to the previous example and add grouping and ordering (```questionsGrouppedOrder```) for
 all except the first set. This will also filter out any question not specified in your ordering.
-```
+```javascript
 	var filterSets = {
 		"all" : {
 		},
@@ -84,7 +84,7 @@ Advanced filtering
 In filter sets you may go for more advanced filters by using ```answerFilter``` or ```questionFilter``` functions.
 
 Here are basic examples which can be easily extend e.g. by using RegExp search on the values or titles.
-```
+```javascript
 	/**
 	 * Skip row (answers of a single person).
 	 *
@@ -128,7 +128,7 @@ The problem is analysing them separetly is not really usefull.
 You can merge those by changing your questionsData a bit.
 
 If you have questions like:
-```
+```javascript
 	// this would typically be a short text box (and could be required in an original form)
 	{
 		title:"Which type of question do you like?"
@@ -142,7 +142,7 @@ If you have questions like:
 ```
 
 Then you merge it like so:
-```
+```javascript
 	{
 		title:"Which type of question do you like and why?"
 		, type: 'text-merged'
