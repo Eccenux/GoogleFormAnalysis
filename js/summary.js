@@ -130,12 +130,17 @@ SummaryRow.prototype.addAnswer = function(answerValue) {
 
 /**
  * Render question summary.
+ * 
+ * Chart data is returned separetly in .chartData property.
+ * 
+ * @return {String} HTML for the row.
  */
 SummaryRow.prototype.render = function() {
 	/** @type Question */
 	var question = this.question;
 	
 	var html = '';
+	var chartData = [];
 	
 	// header
 	html += '<h2>'
@@ -145,14 +150,26 @@ SummaryRow.prototype.render = function() {
 		+'</h2>'
 	;
 
-	// helper function
+	// options helper function
 	var _self = this;
-	function _renderOptionSummary(title, totalForOption) {
+	function _renderOptionSummary(title, totalForOption, color) {
 		return '<li class="option">'
-				+'<span class="title">' + title + '</span>'
+				+' <span class="color" style="background-color:' + color + '"> </span>'
+				+' <span class="title">' + title + '</span>'
 				+' <span class="total-for-option">' + totalForOption + '</span>'
 				+' <span class="total-percentage">' + Math.round(totalForOption / _self.totalAnswers * 100).toString() + '%</span>'
 			+'</li>';
+	}
+	
+	// chart helper function
+	if ('options' in question) {
+		var optionsCount = question.options.length;
+		if (question.other) {
+			optionsCount++;
+		}
+		var _renderChartOption = function (title, totalForOption, index) {
+			return charts.renderOption(title, totalForOption, index, optionsCount);
+		};
 	}
 
 	// text summary
@@ -166,11 +183,16 @@ SummaryRow.prototype.render = function() {
 		case 'date':
 		case 'select-one':
 		case 'select-many':
+			var index = 0;
 			for (var v in this.summary) {
-				html += _renderOptionSummary(v, this.summary[v]);
+				var chartOption = _renderChartOption(v, this.summary[v], index++);
+				html += _renderOptionSummary(v, this.summary[v], chartOption.color);
+				chartData.push(chartOption);
 			}
 			if (question.other) {
-				html += _renderOptionSummary('Inne', this.summaryOther);
+				var chartOption =_renderChartOption('Inne', this.summaryOther, index++);
+				html += _renderOptionSummary('Inne', this.summaryOther, chartOption.color);
+				chartData.push(chartOption);
 			}
 		break;
 		case 'grid':
@@ -181,5 +203,12 @@ SummaryRow.prototype.render = function() {
 		break;
 	}
 	html += '</ul>';
+
+	switch (question.type) {
+		case 'select-one':
+		case 'select-many':
+			this.chartData = chartData;
+		break;
+	}
 	return html;
 };

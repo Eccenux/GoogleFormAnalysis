@@ -147,6 +147,7 @@ FilterSet.prototype.simpleFilterFactory = function(valuesByTitle, toKeep) {
  *
  * @param {Object} summary Summary object.
  * @param {Questions} questions Parsed questions.
+ * @return {String} HTML for the set.
  */
 FilterSet.prototype.render = function(summary, questions) {
 	var filterSet = this;
@@ -157,12 +158,13 @@ FilterSet.prototype.render = function(summary, questions) {
 	}
 
 	function _renderRow(title) {
-		html += "<div class='question'>";
 		if (title in summary) {
+			/** @type SummaryRow */
 			var summaryRow = summary[title];
+			html += "<div class='question-" + summaryRow.question.type + "' data-summary-title='" + title + "'>";
 			html += summaryRow.render();
+			html += "</div>";
 		}
-		html += "</div>";
 	}
 
 	var html = "";

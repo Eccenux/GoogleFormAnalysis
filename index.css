@@ -59,7 +59,7 @@ ul.summary-grid > li > span {
 }
 
 /* groups */
-.questions-group .question {
+.questions-group [class^=question-] {
 	float : left;
 	box-sizing: border-box;
 	padding-right: 2em;
@@ -74,4 +74,13 @@ ul.summary-grid > li > span {
 	height: 0;
 	clear: both;
 	visibility: hidden;
+}
+
+/* charts */
+[class^=question-select-] [id^=chart-container-] {
+	width:200px;
+	height:200px;
+}
+[class^=question-select-] ul[class^=summary-] {
+	float:left;
 }

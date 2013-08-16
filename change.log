@@ -25,4 +25,6 @@ Data merging and filtering.
 * Easy answer filtering (keep and skip).
 * Filters GUI - choose one of named filter sets and re-render summary.
 
-...
+Final rendering
+* Search for a nice chart library.
+* Drawing pie charts (select-one, select-many).

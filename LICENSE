@@ -18,3 +18,18 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------------------------
+ External libraries
+-----------------------------
+
+If not specified otherwise all files are under above license.
+
+Some other libraries (e.g. logger.js) are double licensed.
+You can find more details in the JS files of the libraries.
+
+External libraries used are:
+* /js/date-functions.js - MIT license, Copyright (C) 2004 Baron Schwartz <baron at sequent dot org>
+* /js/charts/amcharts/ - linkware license, Copyright (C) Antanas Marcelionis (see more in amcharts/licence.txt)
+* /js/charts/color.js - don't care license ;-), Author: Stoyan Stefanov <sstoo@gmail.com>
+* /js/charts/colorGenerator.js - don't care license ;-), Author: bebraw <http://stackoverflow.com/users/228885/bebraw>
