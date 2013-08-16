@@ -17,6 +17,8 @@
  * @returns {FilterSet}
  */
 function FilterSet(properties) {
+	properties = properties || {};
+	
 	// simple answer filters
 	if ('keep' in properties) {
 		this.answerFilter = this.simpleFilterFactory(properties.keep, true);
@@ -139,3 +141,42 @@ FilterSet.prototype.simpleFilterFactory = function(valuesByTitle, toKeep) {
 
 	return answerFilter;
 };
+
+/**
+ * Render filter set with given anserwers and questions.
+ *
+ * @param {Object} summary Summary object.
+ * @param {Questions} questions Parsed questions.
+ */
+FilterSet.prototype.render = function(summary, questions) {
+	var filterSet = this;
+
+	var questionsOrder = ('questionsOrder' in filterSet) ? filterSet.questionsOrder : questions.getTitles();
+	if ('questionsGrouppedOrder' in filterSet) {
+		questionsOrder = filterSet.questionsGrouppedOrder;
+	}
+
+	function _renderRow(title) {
+		html += "<div class='question'>";
+		if (title in summary) {
+			var summaryRow = summary[title];
+			html += summaryRow.render();
+		}
+		html += "</div>";
+	}
+
+	var html = "";
+	for (var i = 0; i < questionsOrder.length; i++) {
+		if (typeof(questionsOrder[i]) != 'object') {
+			_renderRow(questionsOrder[i]);
+		}
+		else {
+			html += "<div class='questions-group'>";
+			for (var j = 0; j < questionsOrder[i].length; j++) {
+				_renderRow(questionsOrder[i][j]);
+			}
+			html += "</div>";
+		}
+	}
+	return html;
+}

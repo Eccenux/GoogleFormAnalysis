@@ -23,3 +23,4 @@ Data merging and filtering.
 * Allow specifing named filter sets for the survey
 * Easy question filtering, ordering and grouping.
 * Easy answer filtering (keep and skip).
+* Filters GUI - choose one of named filter sets and re-render summary.

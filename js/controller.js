@@ -1,49 +1,66 @@
 /**
  * Parsing data to answers.
  */
-var questions = new Questions(questionsData);
-var answers = new Answers(answersData, questions);
+window.questions = new Questions(questionsData);
+window.answers = new Answers(answersData, questions);
 
 /**
  * Creating summary (visual and object with SummaryRows in an assoc. array).
+ *
+ * When filtering sets are enabled it will return summary from the first set.
+ *
+ * @param {Answers} answers Parsed answers.
+ * @param {Questions} questions Parsed questions.
  * @type Object
  */
-window.summary = (function(answers, questions){
+window.summary = (function(answers, questions, filterSets){
 	var _LOG = new Logger("controller");
 
-	var filterSet = new FilterSet(filterSets['liczba mas: żadna']);
-
-	var summary = answers.summary(filterSet);
-
-	var questionsOrder = ('questionsOrder' in filterSet) ? filterSet.questionsOrder : questions.getTitles();
-	if ('questionsGrouppedOrder' in filterSet) {
-		questionsOrder = filterSet.questionsGrouppedOrder;
-	}
-
-	function _renderRow(title) {
-		html += "<div class='question'>"
-		if (title in summary) {
-			var summaryRow = summary[title];
-			html += summaryRow.render();
-		}
-		html += "</div>"
-	}
-
-	var html = "";
-	for (var i = 0; i < questionsOrder.length; i++) {
-		if (typeof(questionsOrder[i]) != 'object') {
-			_renderRow(questionsOrder[i]);
-		}
-		else {
-			html += "<div class='questions-group'>"
-			for (var j = 0; j < questionsOrder[i].length; j++) {
-				_renderRow(questionsOrder[i][j]);
+	// with filter sets
+	if (filterSets) {
+		// prepare filter sets GUI
+		document.getElementById('filter-sets').style.display = 'block';
+		var filterSetSelector = document.getElementById('filter-set');
+		var firstSetName = null;
+		for (var setName in filterSets) {
+			if (firstSetName == null) {
+				firstSetName = setName;
 			}
-			html += "</div>"
+			var option = document.createElement('option');
+			option.appendChild(document.createTextNode(setName));
+			filterSetSelector.appendChild(option);
 		}
+		
+		/**
+		 * Show given set.
+		 * 
+		 * @param {String} setName
+		 * @param {Object} filterSets
+		 * @return {Object} summary object.
+		 */
+		function _showSet (setName, filterSets) {
+			var filterSetProperties = (setName in filterSets) ? filterSets[setName] : {};
+			var filterSet = new FilterSet(filterSetProperties);
+			var summary = answers.summary(filterSet);
+			document.getElementById('summary').innerHTML = filterSet.render(summary, questions);
+			return summary;
+		}
+
+		// on change
+		filterSetSelector.addEventListener('change', function () {
+			_showSet(this.value, filterSets);
+		});
+
+		// first one
+		var summary = _showSet(firstSetName, filterSets);
 	}
-	document.getElementById('summary').innerHTML = html;
+	else {
+		// render set
+		var filterSet = new FilterSet();
+		var summary = answers.summary(filterSet);
+		document.getElementById('summary').innerHTML = filterSet.render(summary, questions);
+	}
 
 	return summary;
-})(answers, questions);
+})(answers, questions, filterSets);
 
