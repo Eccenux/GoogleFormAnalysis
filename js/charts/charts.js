@@ -18,7 +18,11 @@ window.charts = (function(AmCharts, colorGenerator){
 
 	var colorScheme = {
 		start : '#36c',
-		stop : '#bcd'
+		stop : '#bcd',
+		yesStart : '#393',
+		yesStop : '#9c9',
+		noStart : '#933',
+		noStop : '#c99',
 	}
 
 	/**
@@ -53,7 +57,7 @@ window.charts = (function(AmCharts, colorGenerator){
 		 */
 		this.renderOption = function(title, totalForOption, index, optionsCount) {
 			if (!(optionsCount in colorIndexes)) {
-				colorIndexes[optionsCount] = colorGenerator.generate('#36c', '#bcd', optionsCount);
+				colorIndexes[optionsCount] = colorGenerator.generate(colorScheme.start, colorScheme.stop, optionsCount);
 			}
 			return {
 				title : title + ' ' + totalForOption,
@@ -67,10 +71,23 @@ window.charts = (function(AmCharts, colorGenerator){
 		 *
 		 * @param {Array} chartData [{title:"...", value:123}, ...]
 		 * @param {String} containerId Container for the chart.
+		 * @param {Boolean} forceBinaryColorSet If true then binary color set is used.
+		 *		This is usefull for pies with options like: [yes, no] or [yes, maybe, not really, no].
 		 */
-		this.pie = function(chartData, containerId) {
+		this.pie = function(chartData, containerId, forceBinaryColorSet) {
 			if (!_checkContiner(containerId)) {
 				return;
+			}
+			if (forceBinaryColorSet) {
+				var halfLength = Math.ceil(chartData.length / 2);
+				var yesColors = colorGenerator.generate(colorScheme.yesStart, colorScheme.yesStop, halfLength);
+				var noColors = colorGenerator.generate(colorScheme.noStop, colorScheme.noStart, halfLength);
+				for (var i = 0; i < halfLength; i++) {
+					chartData[i].color = yesColors[i];
+				}
+				for (var i = halfLength; i < chartData.length; i++) {
+					chartData[i].color = noColors[i - halfLength];
+				}
 			}
 
 			// PIE CHART

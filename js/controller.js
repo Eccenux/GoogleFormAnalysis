@@ -42,6 +42,21 @@ window.summary = (function(answers, questions, filterSets){
 						break;
 					}
 				}
+				else if (type == 'grid') {
+					var subQuestionContainers = container.querySelectorAll('.sub-summary');
+					var subQuestionTitles = container.querySelectorAll('.sub-summary > h2 > .title');
+					for (var j = 0; j < subQuestionContainers.length; j++) {
+						var subContainer = subQuestionContainers[j];
+						var subTitle = subQuestionTitles[j].innerText;
+						var subChartContainerId = chartContainerId + '-' + j.toString()
+						/** @type SummaryRow */
+						var subSummaryRow = summaryRow.summary[subTitle];
+						var subChartContainer = document.createElement('div');
+						subChartContainer.id = subChartContainerId;
+						subContainer.appendChild(subChartContainer);
+						charts.pie(subSummaryRow.chartData, subChartContainerId, true);
+					}
+				}
 			}
 		}
 	}

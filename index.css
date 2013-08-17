@@ -93,3 +93,18 @@ ul.summary-grid > li > span {
 [class^=question-select-many] ul[class^=summary-] {
 	display: none;
 }
+
+[class^=question-grid] [id^=chart-container-] {
+	width:200px;
+	height:200px;
+}
+[class^=question-grid] ul[class^=summary-select-] {
+	display: none;
+}
+[class^=question-grid] .sub-summary {
+	width: 220px;
+	height: 220px;
+}
+[class^=question-grid] .sub-summary h2 {
+	height: 2em;
+}
