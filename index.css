@@ -12,6 +12,9 @@ body {
 	color: #ccc;
 }
 
+/*
+	lists
+*/
 /* lists with options summary */
 ul[class^=summary-] {
 	display: table;
@@ -36,7 +39,10 @@ ul[class^=summary-text] li {
 	padding-bottom: .5em;
 }
 
-/* grids */
+/*
+	grids
+*/
+/* grid-table */
 ul.summary-grid {
 	display: block;
 }
@@ -58,14 +64,19 @@ ul.summary-grid > li > span {
 	font-size: 100%;
 }
 
-/* groups */
+/*
+	groups
+*/
 .questions-group [class^=question-] {
 	float : left;
 	box-sizing: border-box;
 	padding-right: 2em;
 }
 
-/* clear on a fake element after container */
+/*
+	clear floats
+*/
+/* clear after container for floating elements */
 .questions-group:after,
 .summary-grid:after
 {
@@ -76,7 +87,10 @@ ul.summary-grid > li > span {
 	visibility: hidden;
 }
 
-/* charts */
+/*
+	charts
+*/
+/* select-one */
 [class^=question-select-one] [id^=chart-container-] {
 	width:200px;
 	height:200px;
@@ -85,15 +99,24 @@ ul.summary-grid > li > span {
 	float:left;
 }
 
+/* select-many/date */
 [class^=question-select-many] [id^=chart-container-] {
 	width:100%;
 	max-width:700px;
 	height:250px;
 }
+[class^=question-date] ul[class^=summary-],
 [class^=question-select-many] ul[class^=summary-] {
 	display: none;
 }
 
+/* date */
+[class^=question-date] [id^=chart-container-] {
+	height:200px;
+	width:400px;
+}
+
+/* grid */
 [class^=question-grid] [id^=chart-container-] {
 	width:200px;
 	height:200px;

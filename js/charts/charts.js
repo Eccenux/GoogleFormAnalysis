@@ -1,3 +1,16 @@
+//
+// AmChart language
+//
+var userLanguage = window.navigator.userLanguage || window.navigator.language;
+switch (userLanguage) {
+	case 'pl':
+		//AmCharts.dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		//AmCharts.shortDayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+		//AmCharts.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		AmCharts.shortMonthNames = ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'];
+	break;
+}
+
 /**
  * Charts helper.
  *
@@ -57,7 +70,7 @@ window.charts = (function(AmCharts, colorGenerator){
 		 * @param {Number} totalForOption Total votes for the option.
 		 * @param {Number} index Option index (used for generting color).
 		 * @param {Number} optionsCount Number of options.
-		 * @returns {Object} Chart object. Generated color can be used in a custom legend.
+		 * @returns {Object} Single chart data object. Generated color can be used in a custom legend.
 		 */
 		this.renderOption = function(title, totalForOption, index, optionsCount) {
 			if (!(optionsCount in colorIndexes)) {
@@ -67,6 +80,20 @@ window.charts = (function(AmCharts, colorGenerator){
 				title : title, //+ ' ' + totalForOption,
 				value : totalForOption,
 				color : colorIndexes[optionsCount][index]
+			};
+		};
+
+		/**
+		 * Render a point.
+		 *
+		 * @param {String} title Title of the option.
+		 * @param {Number} totalForOption Total votes for the option.
+		 * @returns {Object} Single chart data object.
+		 */
+		this.renderPoint = function(title, totalForOption) {
+			return {
+				title : title, //+ ' ' + totalForOption,
+				value : totalForOption
 			};
 		};
 
@@ -141,6 +168,53 @@ window.charts = (function(AmCharts, colorGenerator){
 			graph.lineColor = colorScheme.start;
 			graph.lineAlpha = 0;
 			graph.fillAlphas = 0.85;
+			chart.addGraph(graph);
+
+			// WRITE
+			chart.write(containerId);
+		};
+
+		/**
+		 * Timeline chart.
+		 *
+		 * @param {Array} chartData [{title:"...", value:123}, ...]
+		 * @param {String} containerId Container for the chart.
+		 */
+		this.timeline = function(chartData, containerId) {
+			// SERIAL CHART
+			chart = new AmCharts.AmSerialChart();
+			chart.pathToImages = "js/charts/amcharts/images/";
+			chart.dataProvider = chartData;
+			chart.categoryField = "title";
+			chart.startDuration = 0;
+
+			// time-axis
+			var categoryAxis = chart.categoryAxis;
+			categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+			categoryAxis.minPeriod = "DD"; // our data is yearly, so we set minPeriod to YYYY
+			categoryAxis.gridAlpha = 0;
+
+			// value-axis
+			var valueAxis = new AmCharts.ValueAxis();
+			valueAxis.axisAlpha = 0;
+			valueAxis.inside = true;
+			chart.addValueAxis(valueAxis);
+
+			// moving-label
+			var chartCursor = new AmCharts.ChartCursor();
+			chartCursor.cursorAlpha = 0;
+			chartCursor.cursorPosition = "mouse";
+			chartCursor.categoryBalloonDateFormat = "MMM DD";
+			chart.addChartCursor(chartCursor);
+
+			// column graph
+			var graph = new AmCharts.AmGraph();
+			graph.type = "line";
+			graph.valueField = "value";
+			graph.lineColor = colorScheme.start;
+			graph.bullet = "round";
+			graph.bulletSize = 7;
+			graph.lineThickness = 2;
 			chart.addGraph(graph);
 
 			// WRITE

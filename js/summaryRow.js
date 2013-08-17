@@ -154,7 +154,7 @@ SummaryRow.prototype.render = function() {
 	var _self = this;
 	function _renderOptionSummary(title, totalForOption, color) {
 		return '<li class="option">'
-				+' <span class="color" style="background-color:' + color + '"> </span>'
+				+(color ? ' <span class="color" style="background-color:' + color + '"> </span>' : '')
 				+' <span class="title">' + title + '</span>'
 				+' <span class="total-for-option">' + totalForOption + '</span>'
 				+' <span class="total-percentage">' + Math.round(totalForOption / _self.totalAnswers * 100).toString() + '%</span>'
@@ -181,6 +181,11 @@ SummaryRow.prototype.render = function() {
 			}
 		break;
 		case 'date':
+			for (var v in this.summary) {
+				html += _renderOptionSummary(v, this.summary[v]);
+				chartData.push(charts.renderPoint(v, this.summary[v]));
+			}
+		break;
 		case 'select-one':
 		case 'select-many':
 			var index = 0;
@@ -205,6 +210,7 @@ SummaryRow.prototype.render = function() {
 	html += '</ul>';
 
 	switch (question.type) {
+		case 'date':
 		case 'select-one':
 		case 'select-many':
 			this.chartData = chartData;

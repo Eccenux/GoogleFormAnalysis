@@ -40,6 +40,9 @@ window.summary = (function(answers, questions, filterSets){
 						case 'select-many':
 							charts.bar(summaryRow.chartData, chartContainerId);
 						break;
+						case 'date':
+							charts.timeline(summaryRow.chartData, chartContainerId);
+						break;
 					}
 				}
 				else if (type == 'grid') {

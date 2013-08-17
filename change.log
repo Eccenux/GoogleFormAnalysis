@@ -30,3 +30,4 @@ Final rendering
 * Drawing pie charts (select-one, select-many).
 * Drawing bar chart for select-many.
 * Drawing charts in grids (bi-color, without legend).
+* Drawing date (timeline) chart.
