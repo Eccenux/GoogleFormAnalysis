@@ -19,10 +19,14 @@ window.charts = (function(AmCharts, colorGenerator){
 	var colorScheme = {
 		start : '#36c',
 		stop : '#bcd',
-		yesStart : '#393',
-		yesStop : '#9c9',
-		noStart : '#933',
-		noStop : '#c99',
+		yes : {
+			start : '#393',
+			stop : '#9c9'
+		},
+		no : {
+			start : '#933',
+			stop : '#c99'
+		},
 	}
 
 	/**
@@ -60,7 +64,7 @@ window.charts = (function(AmCharts, colorGenerator){
 				colorIndexes[optionsCount] = colorGenerator.generate(colorScheme.start, colorScheme.stop, optionsCount);
 			}
 			return {
-				title : title + ' ' + totalForOption,
+				title : title, //+ ' ' + totalForOption,
 				value : totalForOption,
 				color : colorIndexes[optionsCount][index]
 			};
@@ -78,10 +82,12 @@ window.charts = (function(AmCharts, colorGenerator){
 			if (!_checkContiner(containerId)) {
 				return;
 			}
+
+			// binary color scheme
 			if (forceBinaryColorSet) {
 				var halfLength = Math.ceil(chartData.length / 2);
-				var yesColors = colorGenerator.generate(colorScheme.yesStart, colorScheme.yesStop, halfLength);
-				var noColors = colorGenerator.generate(colorScheme.noStop, colorScheme.noStart, halfLength);
+				var yesColors = colorGenerator.generate(colorScheme.yes.start, colorScheme.yes.stop, halfLength);
+				var noColors = colorGenerator.generate(colorScheme.no.stop, colorScheme.no.start, halfLength);
 				for (var i = 0; i < halfLength; i++) {
 					chartData[i].color = yesColors[i];
 				}
@@ -100,6 +106,9 @@ window.charts = (function(AmCharts, colorGenerator){
 			chart.outlineColor = "#FFFFFF";
 			chart.outlineAlpha = 0.8;
 			chart.outlineThickness = 2;
+			// animation
+			chart.startDuration = 0;	// time
+			//chart.startEffect = "<";	// style
 
 			// hide labels
 			chart.labelsEnabled = false;
@@ -121,7 +130,7 @@ window.charts = (function(AmCharts, colorGenerator){
 			chart.dataProvider = chartData;
 			chart.categoryField = "title";
 			chart.colorField = "color";
-			chart.startDuration = 1;
+			chart.startDuration = 0;
 			chart.rotate = true;
 
 			// column graph
