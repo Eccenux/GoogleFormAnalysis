@@ -28,3 +28,4 @@ Data merging and filtering.
 Final rendering
 * Search for a nice chart library.
 * Drawing pie charts (select-one, select-many).
+* Drawing bar chart for select-many.

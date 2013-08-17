@@ -83,25 +83,44 @@ window.charts = (function(AmCharts, colorGenerator){
 			chart.outlineColor = "#FFFFFF";
 			chart.outlineAlpha = 0.8;
 			chart.outlineThickness = 2;
-			/**
-			// this makes the chart 3D
-			chart.depth3D = 15;
-			chart.angle = 30;
-			/**/
 
 			// hide labels
 			chart.labelsEnabled = false;
 
-			/**
-			// extra legend
-			legend = new AmCharts.AmLegend();
-			legend.position = "bottom";
-			chart.addLegend(legend);
-			/**/
+			// WRITE
+			chart.write(containerId);
+		};
+
+		/**
+		 * Bar chart.
+		 *
+		 * @param {Array} chartData [{title:"...", value:123}, ...]
+		 * @param {String} containerId Container for the chart.
+		 */
+		this.bar = function(chartData, containerId) {
+			// SERIAL CHART
+			chart = new AmCharts.AmSerialChart();
+			chart.pathToImages = "js/charts/amcharts/images/";
+			chart.dataProvider = chartData;
+			chart.categoryField = "title";
+			chart.colorField = "color";
+			chart.startDuration = 1;
+			chart.rotate = true;
+
+			// column graph
+			var graph = new AmCharts.AmGraph();
+			graph.type = "column";
+			graph.title = "";
+			graph.valueField = "value";
+			graph.lineColor = colorScheme.start;
+			graph.lineAlpha = 0;
+			graph.fillAlphas = 0.85;
+			chart.addGraph(graph);
 
 			// WRITE
 			chart.write(containerId);
 		};
+
 	}
 
 	return new Charts();

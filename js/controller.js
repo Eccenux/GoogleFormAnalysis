@@ -24,6 +24,7 @@ window.summary = (function(answers, questions, filterSets){
 		for (var i = 0; i < questionContainers.length; i++) {
 			var container = questionContainers[i];
 			var title = container.getAttribute('data-summary-title');
+			var type = container.className.replace(/^question-/, '');
 			var chartContainerId = 'chart-container-' + i.toString();
 			if (title in summary) {
 				/** @type SummaryRow */
@@ -32,7 +33,14 @@ window.summary = (function(answers, questions, filterSets){
 					var chartContainer = document.createElement('div');
 					chartContainer.id = chartContainerId;
 					container.appendChild(chartContainer);
-					charts.pie(summaryRow.chartData, chartContainerId);
+					switch (type) {
+						case 'select-one':
+							charts.pie(summaryRow.chartData, chartContainerId);
+						break;
+						case 'select-many':
+							charts.bar(summaryRow.chartData, chartContainerId);
+						break;
+					}
 				}
 			}
 		}

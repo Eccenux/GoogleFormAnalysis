@@ -77,10 +77,19 @@ ul.summary-grid > li > span {
 }
 
 /* charts */
-[class^=question-select-] [id^=chart-container-] {
+[class^=question-select-one] [id^=chart-container-] {
 	width:200px;
 	height:200px;
 }
-[class^=question-select-] ul[class^=summary-] {
+[class^=question-select-one] ul[class^=summary-] {
 	float:left;
+}
+
+[class^=question-select-many] [id^=chart-container-] {
+	width:100%;
+	max-width:700px;
+	height:250px;
+}
+[class^=question-select-many] ul[class^=summary-] {
+	display: none;
 }
