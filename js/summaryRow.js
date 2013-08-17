@@ -144,7 +144,7 @@ SummaryRow.prototype.render = function() {
 	
 	// header
 	html += '<h2>'
-			+'<span class="title">' + question.title + '</span>'
+			+'<span class="title">' + ('displayTitle' in question ?  question.displayTitle : question.title) + '</span>'
 			+(this.totalPeople > 0 ? ' <span class="total-people">' + this.totalPeople : ' <span class="total-people total-answers">' + this.totalAnswers) + '</span>'
 			+(this.totalPeople > 0 ? ' <span class="total-answers">' + this.totalAnswers + '</span>' : '')
 		+'</h2>'

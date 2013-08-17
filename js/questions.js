@@ -29,6 +29,15 @@ function Question(properties) {
 	this.title = properties.title;
 	this.type = properties.type;
 
+	/**
+	 * Title to display.
+	 * 
+	 * @type String
+	 */
+	if ('displayTitle' in properties) {
+		this.displayTitle = properties.displayTitle;
+	}
+
 	// depending on type
 	switch (properties.type) {
 		case 'text-merged':
