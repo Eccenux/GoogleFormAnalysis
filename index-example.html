@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SRG &bull; ankieta</title>
+    <title>GFA</title>
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,12 +21,21 @@
 	}
 	</script>
 
+	<!-- base libraries -->
 	<script type="text/javascript" src="js/logger.js"></script>
 	<script type="text/javascript" src="js/questions.js"></script>
 	<script type="text/javascript" src="js/answers.js"></script>
-	<script type="text/javascript" src="js/summary.js"></script>
+	<script type="text/javascript" src="js/summaryRow.js"></script>
 	<script type="text/javascript" src="js/date-functions.js"></script>
+	<script type="text/javascript" src="js/filterSet.js"></script>
 
+	<!-- chart libraries -->
+	<script type="text/javascript" src="js/charts/amcharts/amcharts.js"></script>
+	<script type="text/javascript" src="js/charts/color.js"></script>
+	<script type="text/javascript" src="js/charts/colorGenerator.js"></script>
+	<script type="text/javascript" src="js/charts/charts.js"></script>
+
+	<!-- survey specific data -->
 	<script type="text/javascript" src="js/data/example/answersData.js"></script>
 	<script type="text/javascript" src="js/data/example/questionsData.js"></script>
 
@@ -34,6 +43,11 @@
 </head>
 <body lang="pl">
     <!-- content -->
+	<div id="filter-sets" style="display: none;">
+		<label>Wybierz zestawienie</label>
+		<select id="filter-set">
+		</select>
+	</div>
     <div id="summary"></div>
 	<script type="text/javascript" src="js/controller.js"></script>
 </body>

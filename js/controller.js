@@ -112,5 +112,5 @@ window.summary = (function(answers, questions, filterSets){
 	}
 
 	return summary;
-})(answers, questions, filterSets);
+})(window.answers, window.questions, window.filterSets);
 

@@ -9,6 +9,7 @@ var questionsData =
 [
 	{
 		title:"Sygnatura czasowa"
+		, displayTitle:"Liczba odpowiedzi dziennych"
 		, type: 'date'
 	},
 	{
@@ -16,10 +17,8 @@ var questionsData =
 		, type: 'select-one'
 		, other: true
 		, options:
-			["z lipcowej masy"
-			,"z sierpniowej masy"
-			,"z Facebooka"
-			,"ze strony SRG"
+			["z Facebooka"
+			,"z github :-)"
 			,"z plakatu"
 			,"od znajomych"
 			,"odmowa odpowiedzi"]
@@ -129,12 +128,12 @@ var questionsData =
 		, type: 'text'
 	},
 	{
-		title:"Która masa krytyczna podobała Ci się najbardziej?"
-		, type: 'text'
-	},
-	{
-		title:"Dlaczego ta masa była najciekawsza, najfajniejsza lub najistotniejsza?"
-		, type: 'text'
+		title:"Która masa krytyczna podobała Ci się najbardziej i dlaczego?"
+		, type: 'text-merged'
+		, titles: [
+			"Która masa krytyczna podobała Ci się najbardziej?",
+			'Dlaczego ta masa była najciekawsza, najfajniejsza lub najistotniejsza?'
+		]
 	},
 	{
 		title:"Inne uwagi na temat naszych mas krytycznych"
