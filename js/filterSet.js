@@ -44,7 +44,7 @@ function FilterSet(properties) {
 	}
 
 	// filter based on question order (if no filter for questions is given)
-	if (!('questionFilter' in properties) && ('questionsOrder' in properties)) {
+	if (!('questionFilter' in properties) && ('questionsOrder' in this)) {
 		/**
 		 * Skip whole question (don't show it).
 		 *
@@ -52,7 +52,7 @@ function FilterSet(properties) {
 		 * @returns {Boolean} true if the question should be skipped.
 		 */
 		this.questionFilter = function (question) {
-			if (properties.questionsOrder.indexOf(question.title) >= 0) {
+			if (this.questionsOrder.indexOf(question.title) >= 0) {
 				return false;	// keep
 			}
 			// skip
