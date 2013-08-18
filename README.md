@@ -159,13 +159,12 @@ Then you merge it like so:
 Publishing your analysis
 ------------------------
 
-Note! If you publish full scripts (with `answersData`), the
-answers might reveal identity of people that filled out your survey. This would be bad!
+**Note!** If you publish full scripts (with `answersData`), the answers might reveal identity of people that filled out your survey. This would be bad!
 
-To avoid this, you can copy the generated HTML - probably the easiest way to do this is:
+To avoid this, you could make screenshots, but there is also an export script for Node.js.
 
-1.	Open the developer tools (`CTRL + SHIFT + I` or `F12` - depending on your browser).
-1.	Go to "Elements" (or "HTML") tab.
-1.	Right click on `<html>` tag and choose "Copy as HTML" (or something like that).
-1.	Paste and save to a new file.
-1.	Remove all script tags.
+1.	Install [Node.js](http://nodejs.org/). Default options are fine.
+2.	Open command line and go to `js\data\node` directory.
+3.	Run `node export.js "your data directory name"`.
+
+That's it. All files needed to publish the analysis will be in a directory called "_public".
