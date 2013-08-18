@@ -18,56 +18,12 @@ window.summary = (function(answers, questions, filterSets){
 	var _LOG = new Logger("controller");
 
 	/**
-	 * Render charts.
+	 * Render charts on a page.
 	 *
 	 * @param {Object} summary Summary object.
-	 *	Only summary.chartData and summary.summary[subTitle].chartData is used.
 	 */
 	function _renderCharts(summary) {
-		var questionContainers = document.querySelectorAll('[data-summary-title]');
-		for (var i = 0; i < questionContainers.length; i++) {
-			var container = questionContainers[i];
-			var title = container.getAttribute('data-summary-title');
-			var type = container.className.replace(/^question-/, '');
-			var chartContainerId = 'chart-container-' + i.toString();
-			if (title in summary) {
-				/** @type SummaryRow */
-				var summaryRow = summary[title];
-				if ('chartData' in summaryRow) {
-					var chartContainer = document.createElement('div');
-					chartContainer.id = chartContainerId;
-					container.appendChild(chartContainer);
-					switch (type) {
-						case 'select-one':
-							charts.pie(summaryRow.chartData, chartContainerId);
-						break;
-						case 'select-many':
-							charts.bar(summaryRow.chartData, chartContainerId);
-						break;
-						case 'date':
-							charts.timeline(summaryRow.chartData, chartContainerId);
-						break;
-					}
-				}
-				else if (type == 'grid') {
-					var subQuestionContainers = container.querySelectorAll('.sub-summary');
-					var subQuestionTitles = container.querySelectorAll('.sub-summary > h2 > .title');
-					for (var j = 0; j < subQuestionContainers.length; j++) {
-						var subContainer = subQuestionContainers[j];
-						var subTitle = subQuestionTitles[j].textContent;
-						var subChartContainerId = chartContainerId + '-' + j.toString()
-						if (subTitle in summaryRow.summary) {
-							/** @type SummaryRow */
-							var subSummaryRow = summaryRow.summary[subTitle];
-							var subChartContainer = document.createElement('div');
-							subChartContainer.id = subChartContainerId;
-							subContainer.appendChild(subChartContainer);
-							charts.pie(subSummaryRow.chartData, subChartContainerId, true);
-						}
-					}
-				}
-			}
-		}
+		chartsRenderer.render(summary);
 	}
 
 	/**
