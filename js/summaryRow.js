@@ -202,9 +202,8 @@ SummaryRow.prototype.render = function() {
 		break;
 		case 'grid':
 			for (var v in this.summary) {
-				var fakeRow = new SummaryRow(this.summary[v].question);
 				html += '<li><span class="title">' + v + '</span>\n\
-							<div class="sub-summary">' + fakeRow.render.call(this.summary[v]) + '</div></li>';
+							<div class="sub-summary">' + this.summary[v].render() + '</div></li>';
 			}
 		break;
 	}

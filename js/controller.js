@@ -11,6 +11,7 @@ window.answers = new Answers(answersData, questions);
  *
  * @param {Answers} answers Parsed answers.
  * @param {Questions} questions Parsed questions.
+ * @param {Object} filterSets Filter sets properties.
  * @type Object
  */
 window.summary = (function(answers, questions, filterSets){
@@ -18,6 +19,9 @@ window.summary = (function(answers, questions, filterSets){
 
 	/**
 	 * Render charts.
+	 *
+	 * @param {Object} summary Summary object.
+	 *	Only summary.chartData and summary.summary[subTitle].chartData is used.
 	 */
 	function _renderCharts(summary) {
 		var questionContainers = document.querySelectorAll('[data-summary-title]');
