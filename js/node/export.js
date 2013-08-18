@@ -3,12 +3,45 @@
  *
  * Will also copy files needed to publish results.
  */
+
+//
+// Options
+//
 var options = {
 	dataDirName : ""
 	,scriptsPath : "../"
-	,outputPath : "../_public/"
+	,outputPath : "../../_public/"
+	,rootPath : "../../"
+	,copySpecification : [null
+		,"js/mustardTest.js"
+
+		,"js/logger.js"
+		,"js/questions.js"
+
+		,"js/charts/amcharts/amcharts.js"
+		,"js/charts/amcharts/images/dragIcon.gif"
+		,"js/charts/amcharts/images/dragIconH.gif"
+		,"js/charts/amcharts/images/lens.png"
+
+		,"js/charts/color.js"
+		,"js/charts/colorGenerator.js"
+		,"js/charts/charts.js"
+
+		,"js/chartsRenderer.js"
+
+		//,"js/data/summaryData.js"
+		,{source:"js/data/{dataDirName}/questionsData.js", destination:"js/data/questionsData.js"}
+		,{source:"js/data/{dataDirName}/filterSets.js", destination:"js/data/filterSets.js"}
+
+		,{source:"js/controller-export.js", destinationName:"controller.js"}
+		,{source:"index-export.html", destinationName:"index.html"}
+		,"index.css"
+	]
 };
 
+//
+// Arguments parsing
+//
 var arguments = process.argv.splice(2);
 if (arguments.length == 0) {
 	die("Usage: \n\
@@ -22,12 +55,10 @@ options.dataDirName = arguments[0];
 //
 var fs = require('fs');
 var vm = require('vm');
-fs.copy = require('./fs.copy.js');
-fs.mkdirp = require('./mkdirp.js');
-fs.mkdirpSync = fs.mkdirp.sync;
-// Alias
-fs.mkdirRecursive = fs.mkdirp;
-fs.mkdirRecursiveSync = fs.mkdirp.sync;
+/**
+ * @type Copier
+ */
+var copier = require('./copier.js');
 
 //
 // Pre-checks
@@ -110,8 +141,12 @@ var answers = new Answers(answersData, questions);
 var exporter = new Exporter(answers, questions, filterSets);
 var summaryData = JSON.stringify(exporter.getSummaryData(), null, "\t");	// nicer output
 
-// prepare dir
-fs.mkdirRecursiveSync(options.outputPath + "js/data/");
+// copy files (and create dirs)
+copier.copyFileArray(options.copySpecification, options.outputPath, options.rootPath,
+	function(path){
+		return path.replace('{dataDirName}', options.dataDirName);
+	}
+);
 
 // save data
 fs.writeFile(options.outputPath + "js/data/summaryData.js", "var summaryData = " + summaryData, function(err) {
