@@ -3,6 +3,8 @@ GoogleFormAnalysis
 
 GFA makes analyzing Google Forms easier by filtering and reformatting summary of results.
 
+![example charts (pl)](https://raw.github.com/Eccenux/GoogleFormAnalysis/master/_extra/screenshot-medium.jpg)
+
 Steps to create your own
 ------------------------
 
