@@ -36,4 +36,6 @@ External libraries used are:
 
 Export libraries (Node):
 * mkdirP - MIT license, https://github.com/substack/node-mkdirp 
-* fs.copy - MIT license, https://raw.github.com/coolaj86/utile-fs/master/fs.extra/
+* fs.copy
+** MIT license, https://raw.github.com/coolaj86/utile-fs/master/fs.extra/
+** don't care license ;-), http://procbits.com/2011/11/15/synchronous-file-copy-in-node-js
