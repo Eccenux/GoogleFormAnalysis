@@ -3,6 +3,8 @@ GoogleFormAnalysis
 
 GFA makes analyzing Google Forms easier by filtering and reformatting summary of results.
 
+Example result below (one of filter sets). In Polish but you get the idea. The red-green charts are binary questions (yes/no with flavors i.e. yes/maybe/not really/no). It's much easier to analyze grids this way.  
+
 ![example charts (pl)](https://raw.github.com/Eccenux/GoogleFormAnalysis/master/_extra/screenshot-medium.jpg)
 
 Steps to create your own analysis
@@ -18,7 +20,7 @@ and you should customize an index file.
 
 	Note that titles MUST be exactly the same as in your form (case sensitive). This also applies to the options.
 
-1.	Create answersData.js based on CSV saved from your form. CSV export is available in Google Forms interface.
+1.	Create `answersData.js` based on CSV saved from your form. CSV export is available in Google Forms interface.
 
 	See `js\data\example\answersData.js` for an example and steps of transforming your CSV to JavaScript.
 
@@ -52,6 +54,7 @@ Simple filtering is simple ;-). Just add `filterSets` with skip or keep object:
 ```
 
 Note that `keep` and `skip` will only work as expected for this types:
+
 * select-one
 * select-many
 * text
@@ -59,7 +62,7 @@ Note that `keep` and `skip` will only work as expected for this types:
 Grouping and filtering questions
 --------------------------------
 
-If you have many questions in your survey and want to focus only on some questions.
+This is useful if you have many questions in your survey and want to focus only on some questions.
 
 We go to the previous example and add grouping and ordering (`questionsGrouppedOrder`) for
 all sets except the first one. This will also filter out any question not specified in your ordering.
@@ -86,9 +89,9 @@ all sets except the first one. This will also filter out any question not specif
 
 Advanced filtering
 ------------------
-In filter sets you may go for more advanced filters by using `answerFilter` or `questionFilter` functions.
+You may want to use more advanced filters in your filter sets for more interesting results. You can do this by using `answerFilter` or `questionFilter` functions.
 
-Here are basic examples which can be easily extend e.g. by using `RegExp` search on the values or titles.
+Here is a basic example of both functions which should be easy to modify to your needs. You could for example use `RegExp` to search values for interesting phrases.
 ```javascript
 	/**
 	 * Skip row (answers of a single person).
@@ -165,7 +168,7 @@ Publishing your analysis
 
 To avoid this, you could make screenshots, but there is also an export script for Node.js.
 
-1.	Install [Node.js](http://nodejs.org/). Default options are fine.
+1.	Install [Node.js](http://nodejs.org/) (you can use default options).
 2.	Open command line and go to `js\data\node` directory.
 3.	Run `node export.js "your data directory name"`.
 
