@@ -19,6 +19,14 @@ window.colorGenerator = (function(Color){
 			return ret;
 		}
 
+		/**
+		 * Generate colors sequence.
+		 *
+		 * @param {String} start Start color (any CSS format should work - both hex and names should be fine).
+		 * @param {String} end End colot.
+		 * @param {type} n Number of colors to generate.
+		 * @returns {Array} Array of generated colors.
+		 */
 		this.generate = function (start, end, n) {
 			var ret = [];
 

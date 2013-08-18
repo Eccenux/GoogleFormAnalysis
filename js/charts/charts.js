@@ -12,7 +12,7 @@ switch (userLanguage) {
 }
 
 /**
- * Charts helper.
+ * General charts helper singleton.
  *
  * You can rewrite this class to use your favorite chart library.
  *
@@ -43,7 +43,7 @@ window.charts = (function(AmCharts, colorGenerator){
 	}
 
 	/**
-	 * Charts helper class.
+	 * General charts helper class.
 	 * 
 	 * @returns {Charts}
 	 */
@@ -152,7 +152,7 @@ window.charts = (function(AmCharts, colorGenerator){
 		 */
 		this.bar = function(chartData, containerId) {
 			// SERIAL CHART
-			chart = new AmCharts.AmSerialChart();
+			var chart = new AmCharts.AmSerialChart();
 			chart.pathToImages = "js/charts/amcharts/images/";
 			chart.dataProvider = chartData;
 			chart.categoryField = "title";
@@ -182,7 +182,7 @@ window.charts = (function(AmCharts, colorGenerator){
 		 */
 		this.timeline = function(chartData, containerId) {
 			// SERIAL CHART
-			chart = new AmCharts.AmSerialChart();
+			var chart = new AmCharts.AmSerialChart();
 			chart.pathToImages = "js/charts/amcharts/images/";
 			chart.dataProvider = chartData;
 			chart.categoryField = "title";
