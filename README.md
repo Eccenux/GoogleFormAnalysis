@@ -5,8 +5,8 @@ GFA makes analyzing Google Forms easier by filtering and reformatting summary of
 
 ![example charts (pl)](https://raw.github.com/Eccenux/GoogleFormAnalysis/master/_extra/screenshot-medium.jpg)
 
-Steps to create your own
-------------------------
+Steps to create your own analysis
+---------------------------------
 
 To create a base for your own analysis you need to generate (partially automatically) data files
 and you should customize an index file.
@@ -170,3 +170,12 @@ To avoid this, you could make screenshots, but there is also an export script fo
 3.	Run `node export.js "your data directory name"`.
 
 That's it. All files needed to publish the analysis will be in a directory called "_public".
+
+Browser support
+---------------
+
+Well amCharts (which I used) have quite wide browser support, but... I just didn't want to use jQuery this time for the rest of the scripts. If your browser is not up for the task (or as British say: doesn't [cut the mustard](http://responsivenews.co.uk/post/18948466399/cutting-the-mustard)) you are out of luck.
+
+This means IE9+, which covers vast majority of users out there anyway (including mobile). It would be a one hour task to rewrite JavaScript, but I've also used IE8+ stuff in CSS. You'd be surprised how clean your code could be if IE8 and below would move out of the way.
+
+So I say - let's make fun stuff for new browsers. Not because we can't do it otherwise, but because it's such a relief to be creative in a friendly environment.
