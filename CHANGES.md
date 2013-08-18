@@ -42,14 +42,17 @@ Changes and supported features.
 
 ## Export
 
-1. Move chart rendering to separate script.
-0. ...
+1. Some cleanup and fixes.
+2. Move chart rendering to separate script.
 3. Export class to prepare summary for all filterSets and render HTML for each one.
 4. Node.js script for saving export data to a file.
+0. ...
 5. Move needed scripts to separate export folder (e.g. _public).
 6. Add new controller for public export.
 7. Clear index for export of unneeded scripts including mustard test (querySelectorAll still required though = IE8+... add Array.indexOf for IE8 :-/).
 8. Node.js script for creating public export folder (fails when output folder already exists).
+
+JSON.stringify(exporter.getSummaryData(), null, "\t")
 
 ----------
 

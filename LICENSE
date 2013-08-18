@@ -33,3 +33,7 @@ External libraries used are:
 * /js/charts/amcharts/ - linkware license, Copyright (C) Antanas Marcelionis (see more in amcharts/licence.txt)
 * /js/charts/color.js - don't care license ;-), Author: Stoyan Stefanov <sstoo@gmail.com>
 * /js/charts/colorGenerator.js - don't care license ;-), Author: bebraw <http://stackoverflow.com/users/228885/bebraw>
+
+Export libraries (Node):
+* mkdirP - MIT license, https://github.com/substack/node-mkdirp 
+* fs.copy - MIT license, https://raw.github.com/coolaj86/utile-fs/master/fs.extra/
