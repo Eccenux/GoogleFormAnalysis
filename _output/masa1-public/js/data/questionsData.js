@@ -18,7 +18,6 @@ var questionsData =
 		, other: true
 		, options:
 			["z lipcowej masy"
-			,"z sierpniowej masy"
 			,"z Facebooka"
 			,"ze strony SRG"
 			,"z plakatu"
