@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SRG &bull; ankieta</title>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="author" content="Maciej Jaros">
+	<meta name="copyright" content="Maciej Jaros">
+
+	<!-- can't be bothered (at least for now) -->
+	<script type="text/javascript" src="js/mustardTest.js"></script>
+
+	<!-- base libraries -->
+	<script type="text/javascript" src="js/logger.js"></script>
+	<script type="text/javascript" src="js/questions.js"></script>
+
+	<!-- chart libraries -->
+	<script type="text/javascript" src="js/charts/amcharts/amcharts.js"></script>
+	<script type="text/javascript" src="js/charts/color.js"></script>
+	<script type="text/javascript" src="js/charts/colorGenerator.js"></script>
+	<script type="text/javascript" src="js/charts/charts.js"></script>
+
+	<script type="text/javascript" src="js/chartsRenderer.js"></script>
+
+	<!-- survey specific data -->
+	<script type="text/javascript" src="js/data/summaryData.js"></script>
+	<script type="text/javascript" src="js/data/questionsData.js"></script>
+	<script type="text/javascript" src="js/data/filterSets.js"></script>
+
+	<link rel="stylesheet" href="index.css" />
+</head>
+<body lang="pl">
+	<div style="border:1px solid #36c; background:#cde; margin: 1em .5em 2em; padding:.5em 1.5em 1.5em; font-size:110%">
+		<svg style="float:right; margin-top:5px" width="20" height="20" onclick="this.parentNode.style.display='none'">
+			  <path transform="matrix(0.92518971,0,0,0.96421843,-42.440354,-23.866579)"
+				 d="m 46.150111,43.969325 c 1.904576,-5.043836 4.428416,-5.487962 6.863839,-8.102679 l -5.940289,-7.460938 3.323102,-2.5 c 3.059776,2.414699 5.182095,4.4186 6.628906,7.1875 3.349224,-1.628234 4.894438,-4.125458 7.078125,-7.1875 l 3.663505,2.142857 c -1.676811,4.502104 -5.217589,6.233339 -7.346541,8.337054 l 7.17913,7.762277 -3.066406,2.5 c -3.063639,-1.534219 -4.876945,-3.118409 -7.926339,-6.933594 -5.304824,4.062717 -5.151197,4.686018 -6.913505,6.933594 z"
+		/>
+		</svg> 
+		<h2 style="font-size:110%">Instrukcja</h2>
+		<li>Poniżej można wybrać zestawienie (rodzaj filtru).</li>
+		<li>W pytaniach z serii "Dlaczego nie ma Cię na masie..." przewaga czerwonego koloru oznacza zaprzeczenie, przewaga zielonego oznacza potwierdzenie diagnozy.</li>
+		<li>Ankiety działają najlepiej w Chrome, Operze i IE 9+.</li>
+	</div>
+
+	<!-- content -->
+	<div id="filter-sets" style="display: none;">
+		<label>Wybierz zestawienie</label>
+		<select id="filter-set">
+		</select>
+	</div>
+	<div id="summary"></div>
+	<script type="text/javascript" src="js/controller.js"></script>
+</body>
+</html>
