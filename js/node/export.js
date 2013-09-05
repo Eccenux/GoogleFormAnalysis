@@ -10,7 +10,7 @@
 var options = {
 	dataDirName : ""
 	,scriptsPath : "../"
-	,outputPath : "../../_public/"
+	,outputPath : "../../_output/{dataDirName}/"
 	,rootPath : "../../"
 	,copySpecification : [null
 		,"js/mustardTest.js"
@@ -59,6 +59,11 @@ var vm = require('vm');
  * @type Copier
  */
 var copier = require('./copier.js');
+
+//
+// Pre-transform
+//
+options.outputPath = options.outputPath.replace(/\{dataDirName\}/, options.dataDirName);
 
 //
 // Pre-checks
