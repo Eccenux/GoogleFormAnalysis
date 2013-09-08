@@ -131,3 +131,7 @@ ul.summary-grid > li > span {
 [class^=question-grid] .sub-summary h2 {
 	height: 2em;
 }
+
+[class^=question-grid] .total-answers {
+	display: none;
+}
