@@ -169,7 +169,7 @@ Publishing your analysis
 To avoid this, you could make screenshots, but there is also an export script for Node.js.
 
 1.	Install [Node.js](http://nodejs.org/) (you can use default options).
-2.	Open command line and go to `js\data\node` directory.
+2.	Open command line and go to `js\node` directory.
 3.	Run `node export.js "your data directory name"`.
 
 That's it. All files needed to publish the analysis will be in a directory called "_public".
