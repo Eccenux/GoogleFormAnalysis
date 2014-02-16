@@ -32,6 +32,9 @@ var options = {
 		//,"js/data/summaryData.js"
 		,{source:"js/data/{dataDirName}/questionsData.js", destination:"js/data/questionsData.js"}
 		,{source:"js/data/{dataDirName}/filterSets.js", destination:"js/data/filterSets.js"}
+		
+		// ignores
+		,{source:"js/data/{dataDirName}/export-ignore/.gitignore", destination:"js/data/.gitignore"}
 
 		,{source:"js/controller-export.js", destinationName:"controller.js"}
 		,{source:"index-export.html", destinationName:"index.html"}
