@@ -148,7 +148,7 @@ var questions = new Questions(questionsData);
 //
 console.log(summaryDataInput);
 
-var exporter = new ExporterSummary(summaryDataInput, questions);
+var exporter = new ExporterSummary(summaryDataInput, questions, filterSets);
 var summaryData = JSON.stringify(exporter.getSummaryData(), null, "\t");	// nicer output
 
 // copy files (and create dirs)
