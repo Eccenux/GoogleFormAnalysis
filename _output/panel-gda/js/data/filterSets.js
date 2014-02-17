@@ -4,10 +4,10 @@
 var filterSets = {
 	"ogólne" : {
 		questionsGrouppedOrder : [
-			'Sygnatura czasowa',
-			[ 'Dzielnica'  ],
 			[ 'Płeć', 'Wiek' ],
-			[ 'Wykształcenie', 'Dzieci' ]
+			[ 'Wykształcenie', 'Dzieci' ],
+			[ 'Dzielnica'  ],
+			'Sygnatura czasowa'
 		]
 	}
 };
