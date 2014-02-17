@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Panel &bull; ankieta</title>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="author" content="Maciej Jaros">
+	<meta name="copyright" content="Maciej Jaros">
+
+	<!-- can't be bothered (at least for now) -->
+	<script type="text/javascript" src="js/mustardTest.js"></script>
+
+	<!-- base libraries -->
+	<script type="text/javascript" src="js/logger.js"></script>
+	<script type="text/javascript" src="js/questions.js"></script>
+
+	<!-- chart libraries -->
+	<script type="text/javascript" src="js/charts/amcharts/amcharts.js"></script>
+	<script type="text/javascript" src="js/charts/color.js"></script>
+	<script type="text/javascript" src="js/charts/colorGenerator.js"></script>
+	<script type="text/javascript" src="js/charts/charts.js"></script>
+
+	<script type="text/javascript" src="js/chartsRenderer.js"></script>
+
+	<!-- survey specific data -->
+	<script type="text/javascript" src="js/data/summaryData.js"></script>
+	<script type="text/javascript" src="js/data/questionsData.js"></script>
+	<script type="text/javascript" src="js/data/filterSets.js"></script>
+
+	<link rel="stylesheet" href="index.css" />
+</head>
+<body lang="pl">
+	<!-- content -->
+	<div id="filter-sets" style="display: none;">
+		<label>Wybierz zestawienie</label>
+		<select id="filter-set">
+		</select>
+	</div>
+	<div id="summary"></div>
+	<script type="text/javascript" src="js/controller.js"></script>
+</body>
+</html>
