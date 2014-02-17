@@ -161,6 +161,13 @@ FilterSet.prototype.render = function(summary, questions) {
 		if (title in summary) {
 			/** @type SummaryRow */
 			var summaryRow = summary[title];
+			// for re-rendering
+			if (!('render' in summaryRow)) {
+				var fakeSummaryRow = new SummaryRow(summaryRow.question);
+				summaryRow.render = function() {
+					return fakeSummaryRow.render.call(summaryRow);
+				};
+			}
 			html += "<div class='question-" + summaryRow.question.type + "' data-summary-title='" + title + "'>";
 			html += summaryRow.render();
 			html += "</div>";
