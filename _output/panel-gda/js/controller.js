@@ -38,11 +38,12 @@ window.questions = new Questions(questionsData);
 	}
 
 	// with filter sets
-	if (filterSets) {
+	if (filterSets && !summaryData.singleSet) {
 		// prepare filter sets GUI
 		document.getElementById('filter-sets').style.display = 'block';
 		var filterSetSelector = document.getElementById('filter-set');
 		var firstSetName = null;
+		var setsCount = 0;
 		for (var setName in filterSets) {
 			if (firstSetName == null) {
 				firstSetName = setName;
@@ -50,12 +51,20 @@ window.questions = new Questions(questionsData);
 			var option = document.createElement('option');
 			option.appendChild(document.createTextNode(setName));
 			filterSetSelector.appendChild(option);
+			setsCount++;
 		}
-		
-		// on change
-		filterSetSelector.addEventListener('change', function () {
-			_showSet(this.value);
-		});
+
+		// nothing to see here...
+		if (setsCount <= 1) {
+			document.getElementById('filter-sets').style.display = 'none';
+		}
+		// more then one...
+		else {
+			// on change
+			filterSetSelector.addEventListener('change', function () {
+				_showSet(this.value);
+			});
+		}
 
 		// first one
 		_showSet(firstSetName);
