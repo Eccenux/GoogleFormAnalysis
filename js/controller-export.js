@@ -38,7 +38,7 @@ window.questions = new Questions(questionsData);
 	}
 
 	// with filter sets
-	if (filterSets) {
+	if (filterSets && !summaryData.singleSet) {
 		// prepare filter sets GUI
 		document.getElementById('filter-sets').style.display = 'block';
 		var filterSetSelector = document.getElementById('filter-set');
