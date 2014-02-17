@@ -30,10 +30,14 @@ function Copier() {
 	 *
 	 * @param {String} sourcePath
 	 * @param {String} destinationPath
+	 * @param {Boolean} ignoreMissingSource if true then missing source will not throw
 	 */
-	this.copyFile = function (sourcePath, destinationPath) {
+	this.copyFile = function (sourcePath, destinationPath, ignoreMissingSource) {
 		//console.log("source: " + sourcePath);
 		if (!fs.existsSync(sourcePath)) {
+			if (ignoreMissingSource) {
+				return;
+			}
 			throw (new Exception("Source path does not exist.\n" + sourcePath));
 		}
 		var destinationDir = path.dirname(destinationPath);
@@ -50,6 +54,7 @@ function Copier() {
 	 *		Array of source paths.
 	 *		If destination name is to be then different use {source:'', destinationName:''}.
 	 *		If destination realtive path is to be then different use {source:'', destination:''}.
+	 *		If missing source should be just omiited use {source:'', ignoreMissingSource:true, ...}.
 	 * @param {String} destinationDir Destiantion directory path.
 	 * @param {String} sourceDir Source directory path (base) - if not given current dir will be used.
 	 * @param {Function} parsingFunction Extra parsing of both paths (takes path, returns path).
@@ -64,11 +69,15 @@ function Copier() {
 			if (!source) {
 				continue;
 			}
+			var ignoreMissingSource = false;
 			if (typeof(source) == 'object') {
 				if ('destinationName' in source) {
 					destination = path.join(path.dirname(source.source), source.destinationName);
 				} else if ('destination' in source) {
 					destination = source.destination;
+				}
+				if ('ignoreMissingSource' in source) {
+					ignoreMissingSource = source.ignoreMissingSource;
 				}
 				source = source.source;
 			} else {
@@ -82,7 +91,7 @@ function Copier() {
 			}
 
 			//console.log(source + ", " + destination);
-			this.copyFile(source, destination);
+			this.copyFile(source, destination, ignoreMissingSource);
 		}
 	};
 }
