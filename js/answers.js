@@ -37,8 +37,22 @@ function AnswerValue(header, value) {
 			this.dateValue = new Date(value.replace(/EET\s*$/, 'GMT+0200'));
 		break;
 		case 'select-many':
+			// fuu... WhyTheFuu you've changed separators you Google, you!
+			/*
 			if (value.indexOf(';')) {
 				this.values = value.split(';');
+			}
+			*/
+			var leftovers = value + ', ';
+			for (var i = 0; i<question.options.length; i++) {
+				var option = question.options[i];
+				if (leftovers.indexOf(option + ', ') >= 0) {
+					leftovers = leftovers.replace(option + ', ', '');
+					this.values.push(option);	// append option
+				}
+			}
+			if (leftovers.length) {
+				this.values.push(leftovers.slice(0, -2));	// append leftovers
 			}
 		break;
 	}
