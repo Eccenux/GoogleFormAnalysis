@@ -22,7 +22,7 @@ and you should customize an index file.
 	
 	Note that CSV export is available in Google Forms interface.
 
-1.	Create `questionsData.js` (manually or based on e.g. a printout of your form (survey)).
+1.	**Create `questionsData.js`** (manually or based on e.g. a printout of your form (survey)).
 
 	See example in `js\data\example\questionsData.js`
 	
@@ -32,7 +32,7 @@ and you should customize an index file.
 	
 	Options are also case sensitive.
 
-1.	In `index.html` change the `<title>` tag and `<script>` tags so that they point to your data scripts.
+1.	**In `index.html`** change the `<title>` tag and `<script>` tags so that they point to your data scripts.
 
 That's basically it. Open `index.html` in your browser and check the JS console for any errors or warnings.
 You may need to fix your `questionsData.js` for any typos in titles or options (for closed select-one/many questions).
