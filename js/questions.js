@@ -176,11 +176,13 @@ function Questions(questionsData) {
 			case 'select-one':
 			case 'select-many':
 				// only check if there is no free speach option
-				if (!question.other && !question.ignoreOther) {
+				if (!question.other) {
 					for (var i = 0; i < answerValue.values.length; i++) {
 						var v = answerValue.values[i];
 						if (question.options.indexOf(v) == -1) {
-							_LOG.error('One or more values is not valid within closed question Q:', question, "\nA:", answerValue);
+							if (!question.ignoreOther) {
+								_LOG.error('One or more values is not valid within closed question Q:', question, "\nA:", answerValue);
+							}
 							return false;
 						}
 					}
