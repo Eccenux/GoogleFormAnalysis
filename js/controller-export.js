@@ -64,6 +64,9 @@ window.questions = new Questions(questionsData);
 			filterSetSelector.addEventListener('change', function () {
 				_showSet(this.value);
 			});
+			window.addEventListener('load', function () {
+				document.querySelector('#filter-set').focus();
+			})
 		}
 
 		// first one

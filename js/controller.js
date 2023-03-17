@@ -64,7 +64,11 @@ window.summary = (function(answers, questions, filterSets){
 
 		// first one
 		var summary = _showSet(firstSetName, filterSets);
-	}
+		
+		window.addEventListener('load', function () {
+			document.querySelector('#filter-set').focus();
+		})
+}
 	else {
 		// render set
 		var filterSet = new FilterSet();
