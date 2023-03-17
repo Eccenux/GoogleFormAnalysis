@@ -2,6 +2,7 @@ GoogleFormAnalysis
 ==================
 
 GFA makes analyzing Google Forms easier by filtering and reformatting summary of results.
+You can also use any other forms as long as you are able to download CSV or JSON with results (answers).
 
 Example result below (one of filter sets). In Polish but you get the idea. The red-green charts are binary questions (yes/no with flavors i.e. yes/maybe/not really/no). It's much easier to analyze grids this way.  
 
@@ -13,16 +14,23 @@ Steps to create your own analysis
 To create a base for your own analysis you need to generate (partially automatically) data files
 and you should customize an index file.
 
-1.	Create `questionsData.js` based on e.g. a printout of your form (survey).
-	It's basically an array of objects - one object per question.
-
-	See example in `js\data\example\questionsData.js`
-
-	Note that titles MUST be exactly the same as in your form (case sensitive). This also applies to the options.
-
-1.	Create `answersData.js` based on CSV saved from your form. CSV export is available in Google Forms interface.
+1.	**Create `answersData.js`** (based on CSV/JSON/TSV with your results)
 
 	See `js\data\example\answersData.js` for an example and steps of transforming your CSV to JavaScript.
+	
+	The first line is with titles (column names) and the others are with actual anserwers.
+	
+	Note that CSV export is available in Google Forms interface.
+
+1.	Create `questionsData.js` (manually or based on e.g. a printout of your form (survey)).
+
+	See example in `js\data\example\questionsData.js`
+	
+	It's basically an array of objects - one object per question.
+
+	Note that titles MUST be exactly the same as in the 1st line of `answersData.js` (case sensitive). You can use `displayTitle` to provided a different title in final report.
+	
+	Options are also case sensitive.
 
 1.	In `index.html` change the `<title>` tag and `<script>` tags so that they point to your data scripts.
 
