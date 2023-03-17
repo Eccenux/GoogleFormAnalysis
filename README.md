@@ -4,6 +4,17 @@ GoogleFormAnalysis
 GFA makes analyzing Google Forms easier by filtering and reformatting summary of results.
 You can also use any other forms as long as you are able to download CSV or JSON with results (answers).
 
+**Quick steps**:
+1. Create `answersData.js` (with your results).
+1. Create `questionsData.js` (specify question types / config).
+1. Edit `index.html` (specify links to your `answersData.js`).
+1. Open index.html in your browser.
+
+That's basically it. There are options to refine views (with filters) and to export data (with Node.js). Details below.
+
+Example analysis
+---------------------------------
+
 Example result below (one of filter sets). In Polish but you get the idea. The red-green charts are binary questions (yes/no with flavors i.e. yes/maybe/not really/no). It's much easier to analyze grids this way.  
 
 ![example charts (pl)](https://raw.github.com/Eccenux/GoogleFormAnalysis/master/_extra/screenshot-medium.jpg)
