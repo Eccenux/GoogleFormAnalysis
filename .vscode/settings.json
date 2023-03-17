@@ -1,0 +1,16 @@
+{
+	"files.encoding": "utf8",
+	"search.exclude": {
+		"_output/": true,
+		"nbproject/": true,
+		"LICENSE": true,
+		"js/data/": true,
+	},
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/nbproject": true,
+	},
+}

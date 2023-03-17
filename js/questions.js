@@ -17,6 +17,7 @@ function Question(properties) {
 	this.type = "";
 
 	this.other = false;
+	this.ignoreOther = false;
 	this.options = [];
 	this.scale = [];
 
@@ -49,6 +50,10 @@ function Question(properties) {
 			if ('other' in properties)
 			{
 				this.other = properties.other;
+			}
+			if ('ignoreOther' in properties)
+			{
+				this.ignoreOther = properties.ignoreOther;
 			}
 		break;
 		case 'grid':
@@ -171,7 +176,7 @@ function Questions(questionsData) {
 			case 'select-one':
 			case 'select-many':
 				// only check if there is no free speach option
-				if (!question.other) {
+				if (!question.other && !question.ignoreOther) {
 					for (var i = 0; i < answerValue.values.length; i++) {
 						var v = answerValue.values[i];
 						if (question.options.indexOf(v) == -1) {
