@@ -49,7 +49,7 @@ window.summary = (function(answers, questions, filterSets){
 	}
 
 	// data check
-	if (answers.isEmpty() || questions.isEmpty) {
+	if (answers.isEmpty() || questions.isEmpty()) {
 		document.getElementById('summary').innerHTML = 'Answers or questions are empty. Make sure to copy your data to the data folder.';
 		document.getElementById('summary').classList.add('invalid');
 		return;

@@ -5,9 +5,8 @@ GFA makes analyzing Google Forms easier by filtering and reformatting summary of
 You can also use any other forms as long as you are able to download CSV or JSON with results (answers).
 
 **Quick steps**:
-1. Create `answersData.js` (with your results).
-1. Create `questionsData.js` (specify question types / config).
-1. Edit `index.html` (specify links to your `answersData.js`).
+1. Create `data/answersData.js` (with your results).
+1. Create `data/questionsData.js` (specify question types / config).
 1. Open index.html in your browser.
 
 That's basically it. There are options to refine views (with filters) and to export data (with Node.js). Details below.
@@ -27,7 +26,7 @@ and you should customize an index file.
 
 1.	**Create `answersData.js`** (based on CSV/JSON/TSV with your results)
 
-	See `js\data\example\answersData.js` for an example and steps of transforming your CSV to JavaScript.
+	See `_export_input\example\answersData.js` for an example and steps of transforming your CSV to JavaScript.
 	
 	The first line is with titles (column names) and the others are with actual anserwers.
 	
@@ -35,15 +34,13 @@ and you should customize an index file.
 
 1.	**Create `questionsData.js`** (manually or based on e.g. a printout of your form (survey)).
 
-	See example in `js\data\example\questionsData.js`
+	See example in `_export_input\example\questionsData.js`
 	
 	It's basically an array of objects - one object per question.
 
-	Note that titles MUST be exactly the same as in the 1st line of `answersData.js` (case sensitive). You can use `displayTitle` to provided a different title in final report.
+	Note that question titles MUST be exactly the same as in the 1st line of `answersData.js` (case sensitive). You can use `displayTitle` to provided a different title in final report.
 	
 	Options are also case sensitive.
-
-1.	**In `index.html`** change the `<title>` tag and `<script>` tags so that they point to your data scripts.
 
 That's basically it. Open `index.html` in your browser and check the JS console for any errors or warnings.
 You may need to fix your `questionsData.js` for any typos in titles or options (for closed select-one/many questions).

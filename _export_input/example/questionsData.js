@@ -1,4 +1,12 @@
 /**
+	Tytuł ankiety.
+*/
+window.addEventListener('load', function() {
+	document.title = "Example title";
+	// document.body.classList.add('use-grid');
+});
+
+/**
 	Pytania (tylko użyte):
 	* [select-one] jednokrotny wybór = wybierz z listy
 	* [select-many] wielokrotny wybór

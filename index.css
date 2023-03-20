@@ -147,3 +147,11 @@ ul.summary-grid > li > span {
 	box-sizing: border-box;
 	border: 2px solid black;
 }
+
+:root {
+	--min-item-width:360px;
+}
+body.use-grid #summary {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--min-item-width),1fr));
+}		
