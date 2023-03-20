@@ -76,10 +76,18 @@ function Questions(questionsData) {
 
 	var _LOG = new Logger("questions");
 
+	/** Length of questions. */
 	this.length = 0;
 
 	_constructor();
 	function _constructor() {
+		if (validate(questionsData)) {
+			parse(questionsData);
+		}
+	}
+
+	/** Pre-parse */
+	function parse(questionsData) {
 		for (var i = 0; i < questionsData.length; i++) {
 			var question = new Question(questionsData[i]);
 			_questionTitles.push(question.title);
@@ -91,6 +99,11 @@ function Questions(questionsData) {
 			}
 		}
 		_self.length = _questionTitles.length;
+	}
+
+	/** Empty or all invalid. */
+	this.isEmpty = function () {
+		return _self.length === 0;
 	}
 
 	/**
@@ -143,6 +156,18 @@ function Questions(questionsData) {
 		}
 		return questionsData[index];
 	};
+
+	/** Pre-validate data. */
+	function validate(questionsData) {
+		if (!Array.isArray(questionsData)) {
+			_LOG.error('questionsData is not an array');
+			return false;
+		} else if (questionsData.length === 0) {
+			_LOG.error('questionsData is empty');
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Check if the answer value is valid.

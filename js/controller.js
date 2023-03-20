@@ -1,6 +1,12 @@
 /**
  * Parsing data to answers.
  */
+if (!Array.isArray(window.questionsData)) {
+	questionsData = [];
+}
+if (!Array.isArray(window.answersData)) {
+	answersData = [[]];
+}
 window.questions = new Questions(questionsData);
 window.answers = new Answers(answersData, questions);
 
@@ -42,6 +48,13 @@ window.summary = (function(answers, questions, filterSets){
 		return summary;
 	}
 
+	// data check
+	if (answers.isEmpty() || questions.isEmpty) {
+		document.getElementById('summary').innerHTML = 'Answers or questions are empty. Make sure to copy your data to the data folder.';
+		document.getElementById('summary').classList.add('invalid');
+		return;
+	}
+
 	// with filter sets
 	if (filterSets) {
 		// prepare filter sets GUI
@@ -68,7 +81,7 @@ window.summary = (function(answers, questions, filterSets){
 		window.addEventListener('load', function () {
 			document.querySelector('#filter-set').focus();
 		})
-}
+	}
 	else {
 		// render set
 		var filterSet = new FilterSet();

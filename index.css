@@ -135,3 +135,15 @@ ul.summary-grid > li > span {
 [class^=question-grid] .total-answers {
 	display: none;
 }
+
+/* messages, invalid data */
+.message.invalid,
+#summary.invalid {
+	background-color: gold;
+	color: black;
+	font-size: 110%;
+	border-radius: 1em;
+	padding: 1em;
+	box-sizing: border-box;
+	border: 2px solid black;
+}

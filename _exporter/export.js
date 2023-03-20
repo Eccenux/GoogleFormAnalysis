@@ -4,14 +4,18 @@
  * Will also copy files needed to publish results.
  */
 
+// TODO: Test in modern Node.js
+// TODO: Should re-write this for modern Node... someday 🙃.
+
 //
 // Options
 //
 var options = {
 	dataDirName : ""
-	,scriptsPath : "../"
-	,outputPath : "../../_output/{dataDirName}/"
-	,rootPath : "../../"
+	,scriptsPath : "../js/"
+	,userDataPath : "../_export_input/{dataDirName}/"
+	,outputPath : "../_export_output/{dataDirName}/"
+	,rootPath : "../"
 	,copySpecification : [null
 		,"js/mustardTest.js"
 
@@ -29,12 +33,12 @@ var options = {
 
 		,"js/chartsRenderer.js"
 
-		//,"js/data/summaryData.js"
-		,{source:"js/data/{dataDirName}/questionsData.js", destination:"js/data/questionsData.js"}
-		,{source:"js/data/{dataDirName}/filterSets.js", destination:"js/data/filterSets.js"}
+		//,"_export_input/summaryData.js"
+		,{source:"_export_input/{dataDirName}/questionsData.js", destination:"data/questionsData.js"}
+		,{source:"_export_input/{dataDirName}/filterSets.js", destination:"data/filterSets.js"}
 		
 		// ignores
-		,{source:"js/data/{dataDirName}/export-ignore/.gitignore", destination:"js/data/.gitignore"}
+		,{source:"_export_input/{dataDirName}/export-ignore/.gitignore", destination:"data/.gitignore"}
 
 		,{source:"js/controller-export.js", destinationName:"controller.js"}
 		,{source:"index-export.html", destinationName:"index.html"}
@@ -67,6 +71,7 @@ var copier = require('./copier.js');
 // Pre-transform
 //
 options.outputPath = options.outputPath.replace(/\{dataDirName\}/, options.dataDirName);
+options.userDataPath = options.userDataPath.replace(/\{dataDirName\}/, options.dataDirName);
 
 //
 // Pre-checks
@@ -133,9 +138,9 @@ includeJS(options.scriptsPath + "charts/charts.js");
 includeJS(options.scriptsPath + "exporter.js");
 
 // survey specific data
-includeJS(options.scriptsPath + "data/" + options.dataDirName + "/answersData.js");
-includeJS(options.scriptsPath + "data/" + options.dataDirName + "/questionsData.js");
-includeJS(options.scriptsPath + "data/" + options.dataDirName + "/filterSets.js");
+includeJS(options.userDataPath + "answersData.js");
+includeJS(options.userDataPath + "questionsData.js");
+includeJS(options.userDataPath + "filterSets.js");
 
 //
 // Init
@@ -157,7 +162,7 @@ copier.copyFileArray(options.copySpecification, options.outputPath, options.root
 );
 
 // save data
-fs.writeFile(options.outputPath + "js/data/summaryData.js", "var summaryData = " + summaryData, function(err) {
+fs.writeFile(options.outputPath + "data/summaryData.js", "var summaryData = " + summaryData, function(err) {
     if(err) {
         console.log(err);
     } else {

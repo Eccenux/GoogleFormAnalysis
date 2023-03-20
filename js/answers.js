@@ -72,6 +72,8 @@ function Answers(answersData, questions) {
 
 	var _LOG = new Logger("Answers");
 
+	_constructor();
+
 	/**
 	 * Constructor.
 	 */
@@ -82,9 +84,13 @@ function Answers(answersData, questions) {
 			return;
 		}
 		// now let's parse answers
-		_parseAnserwers(false);
+		_parseAnswers(false);
 	}
-	_constructor();
+
+	/** Empty or all invalid. */
+	this.isEmpty = function () {
+		return _answers.length === 0;
+	}
 
 	/**
 	 * Parse (and check) header row.
@@ -95,6 +101,18 @@ function Answers(answersData, questions) {
 	function _parseHeader (stopOnFirstError) {
 		var reSubtitle = /(.+) \[(.+)\]/;
 		var isOK = true;
+
+		if (!Array.isArray(answersData)) {
+			_LOG.error('answersData is not an array');
+			return false;
+		} else if (answersData.length === 0) {
+			_LOG.error('answersData is empty');
+			return false;
+		} else if (answersData.length <= 1) {
+			_LOG.error('answersData is too small; seem to contain a header row only');
+			return false;
+		}
+
 		for (var i = 0; i < answersData[0].length; i++) {
 			var header = new AnswerHeader({title:answersData[0][i], index : _headers.length});
 			if (reSubtitle.test(header.title)) {
@@ -120,7 +138,7 @@ function Answers(answersData, questions) {
 	 *
 	 * @param {Boolean} stopOnFirstError Stop check upon first error (default = false).
 	 */
-	function _parseAnserwers (stopOnFirstError) {
+	function _parseAnswers (stopOnFirstError) {
 		for (var rowIndex = 1; rowIndex < answersData.length; rowIndex++) {
 			var row = answersData[rowIndex];
 			if (row.length != _headers.length) {

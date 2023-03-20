@@ -1,7 +1,8 @@
 {
 	"files.encoding": "utf8",
 	"search.exclude": {
-		"_output/": true,
+		"_export_input/": true,
+		"_export_output/": true,
 		"nbproject/": true,
 		"LICENSE": true,
 		"js/data/": true,

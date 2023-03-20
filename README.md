@@ -186,9 +186,10 @@ Publishing your analysis
 **Note!** If you publish full scripts (with `answersData`), the answers might reveal identity of people that filled out your survey. This would be bad!
 
 To avoid this, you could make screenshots, but there is also an export script for Node.js.
+Note however that the script was for a rather old Node.js (pre 0.x), so not even sure if it will work with new Node.
 
 1.	Install [Node.js](http://nodejs.org/) (you can use default options).
-2.	Open command line and go to `js\node` directory.
+2.	Open command line and go to `_exporter` directory.
 3.	Run `node export.js "your data directory name"`.
 
 That's it. All files needed to publish the analysis will be in a directory called "_public".

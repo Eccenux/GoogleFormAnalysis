@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Panel &bull; ankieta</title>
+	<title>GFA</title>
 	<meta charset="UTF-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<meta name="author" content="Maciej Jaros">
-	<meta name="copyright" content="Maciej Jaros">
 
-	<!-- can't be bothered (at least for now) -->
+	<!-- ~modern browser check -->
 	<script type="text/javascript" src="js/mustardTest.js"></script>
 
 	<!-- base libraries -->
@@ -29,28 +28,23 @@
 	<script type="text/javascript" src="js/chartsRenderer.js"></script>
 
 	<!-- survey specific data -->
-	<script type="text/javascript" src="js/data/panel-gda/answersData.js"></script>
-	<script type="text/javascript" src="js/data/panel-gda/questionsData.js"></script>
-	<script type="text/javascript" src="js/data/panel-gda/filterSets.js"></script>
-
-	<!-- test -->
-	<!--
-	<script type="text/javascript" src="js/data/panel-gda-wzorzec/summaryData.js"></script>
-	<script type="text/javascript" src="js/data/panel-gda-wzorzec/questionsData.js"></script>
-	<script type="text/javascript" src="js/data/panel-gda-wzorzec/filterSets.js"></script>
-
-	<script type="text/javascript" src="js/node/exporterSummary.js"></script>
-	-->
+	<script type="text/javascript" src="data/answersData.js"></script>
+	<script type="text/javascript" src="data/questionsData.js"></script>
+	<script type="text/javascript" src="data/filterSets.js"></script>
 
 	<link rel="stylesheet" href="index.css" />
 </head>
 <body lang="pl">
-	<!-- content -->
-	<div id="filter-sets" style="display: none;">
-		<label>Wybierz zestawienie</label>
-		<select id="filter-set">
-		</select>
+	<!-- main controls -->
+	<div id="main-controls">
+		<!-- optional: filterSets -->
+		<div id="filter-sets" style="display: none;">
+			<label>Wybierz zestawienie</label>
+			<select id="filter-set">
+			</select>
+		</div>
 	</div>
+	<!-- main content (charts etc) -->
 	<div id="summary"></div>
 	<script type="text/javascript" src="js/controller.js"></script>
 </body>
